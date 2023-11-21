@@ -96,5 +96,11 @@ export const actions = {
 			question,
 			answer: result.text
 		};
+	},
+	askNewQuestion: async () => {
+		return {
+			loaded: true,
+			title: videoTitle
+		};
 	}
 } satisfies Actions;
