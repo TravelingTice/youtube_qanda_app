@@ -72,14 +72,14 @@ export const actions = {
       Question: {question}
       Answer:`;
 
-		const QA_CHAIN_PROMPT = new PromptTemplate({
+		const chainPrompt = new PromptTemplate({
 			inputVariables: ['context', 'question'],
 			template
 		});
 
 		// Create a retrieval QA chain that will combine the documents, the retriever and the chat model
 		const chain = new RetrievalQAChain({
-			combineDocumentsChain: loadQAStuffChain(model, { prompt: QA_CHAIN_PROMPT }),
+			combineDocumentsChain: loadQAStuffChain(model, { prompt: chainPrompt }),
 			retriever,
 			returnSourceDocuments: false,
 			inputKey: 'question',
@@ -87,8 +87,6 @@ export const actions = {
 		});
 
 		const result = await chain.call({ question });
-
-		console.log(result);
 
 		return {
 			answered: true,
